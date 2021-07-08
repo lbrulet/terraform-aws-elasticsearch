@@ -161,7 +161,7 @@ resource "aws_elasticsearch_domain" "default" {
     for_each = var.vpc_enabled ? [true] : []
 
     content {
-      security_group_ids = [join("", aws_security_group.default.*.id)]
+      security_group_ids = [join("", aws_security_group.default.*.id), join("", var.security_groups)]
       subnet_ids         = var.subnet_ids
     }
   }
